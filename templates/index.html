@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Text to Speech</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Image Text to Speech Application</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="file">Upload Image (JPG, PNG, JPEG):</label>
+            <input type="file" name="file" id="file" required>
+            <button type="submit">Upload</button>
+        </form>
+
+        {% if text %}
+            <h2>Extracted Text:</h2>
+            <p>{{ text }}</p>
+            <h3>Click to Listen:</h3>
+            <audio controls>
+                <source src="{{ url_for('static', filename='output_audio.mp3') }}" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        {% endif %}
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
